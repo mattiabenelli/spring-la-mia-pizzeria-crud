@@ -17,6 +17,7 @@ public class Pizza {
 	private String foto;
 	private int price;
 	
+	public Pizza() { }
 	public Pizza(String nome, String descrizione, String foto, int price) {
 		
 		setNome(nome);

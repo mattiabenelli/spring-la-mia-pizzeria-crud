@@ -8,23 +8,25 @@ import org.java.best.repo.PizzaRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-	@Service
-	public class ServicePizza {
+@Service
+public class ServicePizza {
 
-		@Autowired
-		private PizzaRepo pizzaRepo;
+	@Autowired
+	private PizzaRepo pizzaRepo;
+	
+	public List<Pizza> findAll() {
 		
-		public List<Pizza> findAll() {
-			
-			return pizzaRepo.findAll();
-		}
-		public Pizza save(Pizza pizza) {
-			
-			return pizzaRepo.save(pizza);
-		}
-		public Optional<Pizza> findById(int id) {
-			
-			return pizzaRepo.findById(id);
-		}
+		return pizzaRepo.findAll();
 	}
+	public Pizza save(Pizza pizza) {
+		
+		return pizzaRepo.save(pizza);
+	}
+	public Optional<Pizza> findById(int id) {
+		
+		return pizzaRepo.findById(id);
+	}
+}
+	
+	
 

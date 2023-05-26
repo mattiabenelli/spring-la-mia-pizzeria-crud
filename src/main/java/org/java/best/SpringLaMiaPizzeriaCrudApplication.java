@@ -1,5 +1,8 @@
 package org.java.best;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.java.best.pojo.Pizza;
 import org.java.best.service.ServicePizza;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +27,28 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner {
 		
 		
 		
-//		Pizza p1 = new Pizza("ciao", "ciao", "ciao", 1);
-//		System.out.println(p1);
-//		servicePizza.save(p1);
+		Pizza p1 = new Pizza("margherita", "descrizione margherita", "https://staticfanpage.akamaized.net/wp-content/uploads/sites/9/2019/08/LP_8611563.jpg", 1);
+		System.out.println(p1);
 		
+		servicePizza.save(p1);
 		
+		List<Pizza> pizzas = servicePizza.findAll();
+		System.out.println(pizzas);
+		
+		Optional<Pizza> optPizza = servicePizza.findById(1);
+		
+		if (optPizza.isPresent()) {
+			
+			Pizza dbPizza = optPizza.get();
+			
+			System.out.println("Pizza con id 1");
+			System.out.println("--------------");
+			System.out.println(dbPizza);
+		} else 
+			System.out.println("Pizza con id 1 non trovato :-(");
 	}
+		
+		
+	
 
 }
