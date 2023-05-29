@@ -6,6 +6,12 @@
 </head>
 <body>
 	<h1>pizzas</h1>
+	<form th:action="@{/pizzas/by/nome}" method="POST">
+		<label>Nome</label>
+		<input type="text" name="nome" th:value="${nome}">
+		<br>
+		<input type="submit" value="Search">
+	</form>
 	 <ul>
 		<li
 			th:each="pizza : ${pizzas}"

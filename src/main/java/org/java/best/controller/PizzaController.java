@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class PizzaController {
@@ -24,6 +26,16 @@ public class PizzaController {
 		List<Pizza> pizzas = pizzaService.findAll();
 		
 		model.addAttribute("pizzas", pizzas);
+		
+		return "pizzas";
+	}
+	
+	@PostMapping("/pizzas/by/nome")
+	public String getPizzaByNome(Model model, @RequestParam(required = false) String nome) {
+		
+		List<Pizza> pizzas = pizzaService.findByNome(nome);
+		model.addAttribute("pizzas", pizzas);
+		model.addAttribute("nome", nome);
 		
 		return "pizzas";
 	}
