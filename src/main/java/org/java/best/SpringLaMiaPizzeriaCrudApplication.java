@@ -30,7 +30,6 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner {
 		Pizza p1 = new Pizza("margherita1", "descrizione margherita", "https://staticfanpage.akamaized.net/wp-content/uploads/sites/9/2019/08/LP_8611563.jpg", 1);
 		Pizza p2 = new Pizza("margherita2", "descrizione margherita", "https://staticfanpage.akamaized.net/wp-content/uploads/sites/9/2019/08/LP_8611563.jpg", 1);
 		Pizza p3 = new Pizza("margherita3", "descrizione margherita", "https://staticfanpage.akamaized.net/wp-content/uploads/sites/9/2019/08/LP_8611563.jpg", 1);
-		System.out.println(p1);
 		
 		servicePizza.save(p1);
 		servicePizza.save(p2);
