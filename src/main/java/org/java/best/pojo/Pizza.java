@@ -1,9 +1,14 @@
 package org.java.best.pojo;
 
+
+
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Pizza {
@@ -12,9 +17,13 @@ public class Pizza {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
+	@NotBlank(message = "il nome non può essere vuoto")
 	private String nome;
+	@NotBlank(message = "la descrizione non può essere vuota")
 	private String descrizione;
+	@NotBlank(message = "l'url non può essere vuoto")
 	private String foto;
+	@Min(value = 1, message = "Il prezzo non può essere minore di 0")
 	private int price;
 	
 	public Pizza() { }

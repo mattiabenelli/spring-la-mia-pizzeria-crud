@@ -8,11 +8,15 @@ import org.java.best.service.ServicePizza;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import jakarta.validation.Valid;
 
 @Controller
 public class PizzaController {
@@ -42,7 +46,7 @@ public class PizzaController {
 	}
 	
 	@GetMapping("/pizzas/{id}")
-	public String getBook(
+	public String getPizza(
 			Model model,
 			@PathVariable("id") int id
 	) {
@@ -56,12 +60,28 @@ public class PizzaController {
 	}
 	
 	@GetMapping("/pizzas/create")
-	public String createPizza() {
+	public String createPizza(Model model) {
+		
+		model.addAttribute("pizza", new Pizza());
 		
 		return "pizza-create";
 	}
 	@PostMapping("/pizzas/create")
-	public String storePizza(@ModelAttribute Pizza pizza) {
+	public String storePizza(Model model,
+						@Valid @ModelAttribute Pizza pizza,
+						BindingResult bindingResult) {
+		
+		if (bindingResult.hasErrors()) {
+			
+			for (ObjectError err : bindingResult.getAllErrors()) 
+				System.err.println("error: " + err.getDefaultMessage());
+			
+			model.addAttribute("pizza", pizza);
+			model.addAttribute("errors", bindingResult);
+			
+			
+			return "pizza-create";
+		}
 		
 		 pizzaService.save(pizza);
 		
