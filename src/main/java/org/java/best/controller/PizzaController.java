@@ -61,7 +61,7 @@ public class PizzaController {
 		return "pizza-create";
 	}
 	@PostMapping("/pizzas/create")
-	public String storeBook(@ModelAttribute Pizza pizza) {
+	public String storePizza(@ModelAttribute Pizza pizza) {
 		
 		 pizzaService.save(pizza);
 		
@@ -69,7 +69,7 @@ public class PizzaController {
 	}
 	
 	@GetMapping("/pizzas/delete/{id}")
-	public String deleteBook(
+	public String deletePizza(
 			@PathVariable int id
 		) {
 		
@@ -79,4 +79,29 @@ public class PizzaController {
 		
 		return "redirect:/";
 	}
+	
+	@GetMapping("/pizzas/update/{id}")
+	public String editPizza(
+			Model model,
+			@PathVariable int id
+		) {
+		
+		Optional<Pizza> optPizza = pizzaService.findById(id);
+		Pizza pizza = optPizza.get();
+		model.addAttribute("pizza", pizza);
+		
+		return "pizza-update";
+	}
+	@PostMapping("/pizzas/update/{id}")
+	public String updatePizza(
+			@PathVariable int id,
+			@ModelAttribute Pizza pizza
+		) {
+		
+		pizzaService.save(pizza);
+		
+		return "redirect:/";
+	}
+	
+	
 }

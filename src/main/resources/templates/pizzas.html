@@ -22,7 +22,10 @@
 				[[ *{nome} ]]
 			</a>
 			<a th:href="@{/pizzas/delete/{id} (id=*{id})}">
-				DELETE
+				-DELETE
+			</a>
+			<a th:href="@{/pizzas/update/{id} (id=*{id})}">
+				-UPDATE
 			</a>
 		</li>
 	</ul>
