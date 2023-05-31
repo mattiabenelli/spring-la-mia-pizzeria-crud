@@ -113,10 +113,24 @@ public class PizzaController {
 		return "pizza-update";
 	}
 	@PostMapping("/pizzas/update/{id}")
-	public String updatePizza(
+	public String updatePizza(Model model,
 			@PathVariable int id,
-			@ModelAttribute Pizza pizza
+			@Valid @ModelAttribute Pizza pizza,
+			BindingResult bindingResult
 		) {
+		
+		if (bindingResult.hasErrors()) {
+			
+			for (ObjectError err : bindingResult.getAllErrors()) 
+				System.err.println("error: " + err.getDefaultMessage());
+			
+			model.addAttribute("pizza", pizza);
+			model.addAttribute("errors", bindingResult);
+			
+			
+			return "pizza-update";
+		}
+		
 		
 		pizzaService.save(pizza);
 		
